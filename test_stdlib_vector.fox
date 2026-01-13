@@ -1,0 +1,88 @@
+###
+  Test Vector Library Functions
+  Verifikasi: vector_new, vector_push, vector_get, vector_length
+###
+
+ambil "../morph/corelib/lib/std.fox"
+
+fungsi utama()
+    __mf_print_asciz("=== VECTOR LIBRARY TEST ===\n")
+
+    ; Test 1: vector_new
+    var vec = vector_new()
+    __mf_print_asciz("Test 1: vector_new() created\n")
+
+    jika (vec != 0) {
+        __mf_print_asciz("✓ PASS - vector created\n")
+    } lain {
+        __mf_print_asciz("✗ FAIL - vector is null\n")
+        kembali 1
+    }
+
+    ; Test 2: vector_push
+    __mf_print_asciz("\nTest 2: Pushing elements 10, 20, 30\n")
+    vector_push(vec, 10)
+    vector_push(vec, 20)
+    vector_push(vec, 30)
+
+    ; Test 3: vector_length
+    var len = vector_length(vec)
+    __mf_print_asciz("Test 3: vector_length() = ")
+    __mf_print_i64(len)
+    __mf_print_asciz("\n")
+
+    jika (len == 3) {
+        __mf_print_asciz("✓ PASS - length is 3\n")
+    } lain {
+        __mf_print_asciz("✗ FAIL - length is not 3\n")
+    }
+
+    ; Test 4: vector_get
+    __mf_print_asciz("\nTest 4: Retrieving elements\n")
+    var val0 = vector_get(vec, 0)
+    var val1 = vector_get(vec, 1)
+    var val2 = vector_get(vec, 2)
+
+    __mf_print_asciz("vec[0] = ")
+    __mf_print_i64(val0)
+    __mf_print_asciz("\n")
+
+    __mf_print_asciz("vec[1] = ")
+    __mf_print_i64(val1)
+    __mf_print_asciz("\n")
+
+    __mf_print_asciz("vec[2] = ")
+    __mf_print_i64(val2)
+    __mf_print_asciz("\n")
+
+    jika (val0 == 10 && val1 == 20 && val2 == 30) {
+        __mf_print_asciz("✓ PASS - all values correct\n")
+    } lain {
+        __mf_print_asciz("✗ FAIL - values incorrect\n")
+    }
+
+    ; Test 5: Automatic resizing (push beyond initial capacity)
+    __mf_print_asciz("\nTest 5: Testing automatic resizing\n")
+    var i = 0
+    selama (i < 20) {
+        vector_push(vec, i * 10)
+        i = i + 1
+    }
+
+    var final_len = vector_length(vec)
+    __mf_print_asciz("After pushing 20 more elements, length = ")
+    __mf_print_i64(final_len)
+    __mf_print_asciz("\n")
+
+    jika (final_len == 23) {
+        __mf_print_asciz("✓ PASS - vector auto-resized correctly\n")
+    } lain {
+        __mf_print_asciz("✗ FAIL - vector size incorrect\n")
+    }
+
+    ; Cleanup
+    vector_free(vec)
+
+    __mf_print_asciz("\n=== VECTOR TEST COMPLETE ===\n")
+    0
+tutup_fungsi

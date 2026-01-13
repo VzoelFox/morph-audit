@@ -1,0 +1,108 @@
+###
+  Test HashMap Library Functions
+  Verifikasi: hashmap_new, hashmap_insert, hashmap_get, hashmap_has
+###
+
+ambil "../morph/corelib/lib/std.fox"
+
+fungsi utama()
+    __mf_print_asciz("=== HASHMAP LIBRARY TEST ===\n")
+
+    ; Test 1: hashmap_new
+    var map = hashmap_new()
+    __mf_print_asciz("Test 1: hashmap_new() created\n")
+
+    jika (map != 0) {
+        __mf_print_asciz("✓ PASS - hashmap created\n")
+    } lain {
+        __mf_print_asciz("✗ FAIL - hashmap is null\n")
+        kembali 1
+    }
+
+    ; Test 2: hashmap_insert
+    __mf_print_asciz("\nTest 2: Inserting key-value pairs\n")
+    hashmap_insert(map, "name", 100)
+    hashmap_insert(map, "age", 25)
+    hashmap_insert(map, "score", 95)
+    __mf_print_asciz("Inserted: name=100, age=25, score=95\n")
+
+    ; Test 3: hashmap_has
+    __mf_print_asciz("\nTest 3: Checking key existence\n")
+    var has_name = hashmap_has(map, "name")
+    var has_age = hashmap_has(map, "age")
+    var has_missing = hashmap_has(map, "missing")
+
+    __mf_print_asciz("has(\"name\") = ")
+    __mf_print_i64(has_name)
+    __mf_print_asciz("\n")
+
+    __mf_print_asciz("has(\"age\") = ")
+    __mf_print_i64(has_age)
+    __mf_print_asciz("\n")
+
+    __mf_print_asciz("has(\"missing\") = ")
+    __mf_print_i64(has_missing)
+    __mf_print_asciz("\n")
+
+    jika (has_name == 1 && has_age == 1 && has_missing == 0) {
+        __mf_print_asciz("✓ PASS - hashmap_has works correctly\n")
+    } lain {
+        __mf_print_asciz("✗ FAIL - hashmap_has incorrect\n")
+    }
+
+    ; Test 4: hashmap_get
+    __mf_print_asciz("\nTest 4: Retrieving values\n")
+    var val_name = hashmap_get(map, "name")
+    var val_age = hashmap_get(map, "age")
+    var val_score = hashmap_get(map, "score")
+
+    __mf_print_asciz("get(\"name\") = ")
+    __mf_print_i64(val_name)
+    __mf_print_asciz("\n")
+
+    __mf_print_asciz("get(\"age\") = ")
+    __mf_print_i64(val_age)
+    __mf_print_asciz("\n")
+
+    __mf_print_asciz("get(\"score\") = ")
+    __mf_print_i64(val_score)
+    __mf_print_asciz("\n")
+
+    jika (val_name == 100 && val_age == 25 && val_score == 95) {
+        __mf_print_asciz("✓ PASS - all values retrieved correctly\n")
+    } lain {
+        __mf_print_asciz("✗ FAIL - values incorrect\n")
+    }
+
+    ; Test 5: Collision handling (insert many items)
+    __mf_print_asciz("\nTest 5: Testing collision handling\n")
+    hashmap_insert(map, "key1", 1)
+    hashmap_insert(map, "key2", 2)
+    hashmap_insert(map, "key3", 3)
+    hashmap_insert(map, "key4", 4)
+    hashmap_insert(map, "key5", 5)
+
+    var k1 = hashmap_get(map, "key1")
+    var k5 = hashmap_get(map, "key5")
+
+    __mf_print_asciz("After inserting 5 more keys:\n")
+    __mf_print_asciz("get(\"key1\") = ")
+    __mf_print_i64(k1)
+    __mf_print_asciz("\n")
+
+    __mf_print_asciz("get(\"key5\") = ")
+    __mf_print_i64(k5)
+    __mf_print_asciz("\n")
+
+    jika (k1 == 1 && k5 == 5) {
+        __mf_print_asciz("✓ PASS - collision handling works\n")
+    } lain {
+        __mf_print_asciz("✗ FAIL - collision handling broken\n")
+    }
+
+    ; Cleanup
+    hashmap_free(map)
+
+    __mf_print_asciz("\n=== HASHMAP TEST COMPLETE ===\n")
+    0
+tutup_fungsi

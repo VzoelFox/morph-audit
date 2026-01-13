@@ -1,0 +1,70 @@
+###
+  Test String Library Functions
+  Verifikasi: string_length, string_concat, string_equals
+###
+
+ambil "../morph/corelib/lib/std.fox"
+
+fungsi utama()
+    __mf_print_asciz("=== STRING LIBRARY TEST ===\n")
+
+    ; Test 1: string_length
+    var str1 = "Hello"
+    var len1 = string_length(str1)
+    __mf_print_asciz("Test 1: string_length(\"Hello\") = ")
+    __mf_print_i64(len1)
+    __mf_print_asciz("\n")
+
+    ; Expected: 5
+    jika (len1 == 5) {
+        __mf_print_asciz("✓ PASS\n")
+    } lain {
+        __mf_print_asciz("✗ FAIL\n")
+    }
+
+    ; Test 2: string_equals
+    var str2 = "Hello"
+    var str3 = "World"
+    var eq1 = string_equals(str1, str2)
+    var eq2 = string_equals(str1, str3)
+
+    __mf_print_asciz("Test 2a: string_equals(\"Hello\", \"Hello\") = ")
+    __mf_print_i64(eq1)
+    __mf_print_asciz("\n")
+
+    jika (eq1 == 1) {
+        __mf_print_asciz("✓ PASS\n")
+    } lain {
+        __mf_print_asciz("✗ FAIL\n")
+    }
+
+    __mf_print_asciz("Test 2b: string_equals(\"Hello\", \"World\") = ")
+    __mf_print_i64(eq2)
+    __mf_print_asciz("\n")
+
+    jika (eq2 == 0) {
+        __mf_print_asciz("✓ PASS\n")
+    } lain {
+        __mf_print_asciz("✗ FAIL\n")
+    }
+
+    ; Test 3: string_concat
+    var concat = string_concat(str1, str3)
+    __mf_print_asciz("Test 3: string_concat(\"Hello\", \"World\") = \"")
+    __mf_print_asciz(concat)
+    __mf_print_asciz("\"\n")
+
+    ; Manual verification expected: "HelloWorld"
+    var expected = "HelloWorld"
+    jika (string_equals(concat, expected)) {
+        __mf_print_asciz("✓ PASS\n")
+    } lain {
+        __mf_print_asciz("✗ FAIL\n")
+    }
+
+    ; Cleanup
+    mem_free_safe(concat)
+
+    __mf_print_asciz("\n=== STRING TEST COMPLETE ===\n")
+    0
+tutup_fungsi
