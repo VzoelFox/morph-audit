@@ -1,0 +1,12 @@
+###
+  Test 2: Type annotations
+###
+
+fungsi hitung(x: i64) -> i64
+  var hasil = x * 2
+  hasil
+tutup_fungsi
+
+fungsi utama()
+  hitung(21)
+tutup_fungsi

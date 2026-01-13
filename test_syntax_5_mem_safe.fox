@@ -1,0 +1,11 @@
+###
+  Test 5: Memory safety functions
+###
+
+ambil "../morph/corelib/lib/string.fox"
+
+fungsi utama()
+  var str = "Hello"
+  var len = string_length(str)
+  len
+tutup_fungsi

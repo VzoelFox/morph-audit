@@ -1,0 +1,14 @@
+###
+  Test Stdlib dengan Missing Functions Fixed
+###
+
+ambil "../morph/corelib/lib/memory.fox"
+ambil "../morph/corelib/lib/string.fox"
+
+fungsi utama()
+  var str = "Hello World"
+  var len = string_length(str)
+
+  sistem 90, len  ; Print length
+  len
+tutup_fungsi

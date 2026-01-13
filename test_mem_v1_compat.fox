@@ -1,0 +1,26 @@
+###
+  Test v1 Compatible Memory Functions
+###
+
+ambil "../morph/corelib/lib/memory_v1_compat.fox"
+
+fungsi utama()
+  var buffer = mem_alloc_safe(64)
+
+  jika (buffer == 0)
+    sistem 90, 999
+    1
+  tutup_jika
+
+  mem_store_byte_safe(buffer + 0, 72)
+  mem_store_byte_safe(buffer + 1, 105)
+
+  var ch1 = mem_load_byte_safe(buffer + 0)
+  var ch2 = mem_load_byte_safe(buffer + 1)
+
+  sistem 90, ch1
+  sistem 90, ch2
+
+  mem_free_safe(buffer, 64)
+  0
+tutup_fungsi

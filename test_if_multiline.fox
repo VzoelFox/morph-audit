@@ -1,0 +1,13 @@
+###
+  Test Multiline If-Then-Else
+###
+
+fungsi utama()
+  var x = 10
+
+  jika (x == 0)
+    kembali 999
+  tutup_jika
+
+  kembali x
+tutup_fungsi

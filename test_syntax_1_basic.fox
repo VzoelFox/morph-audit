@@ -1,0 +1,8 @@
+###
+  Test 1: Basic function with return keyword
+###
+
+fungsi utama()
+  var x = 42
+  kembali x
+tutup_fungsi

@@ -1,0 +1,11 @@
+###
+  Test Tanpa Kembali Keyword
+###
+
+fungsi hitung(x: i64) -> i64
+  x * 2
+tutup_fungsi
+
+fungsi utama()
+  hitung(21)
+tutup_fungsi

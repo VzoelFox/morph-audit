@@ -1,0 +1,10 @@
+###
+  Test 3: ambil keyword
+###
+
+ambil "corelib/core/types.fox"
+
+fungsi utama()
+  var x = 42
+  x
+tutup_fungsi

@@ -1,0 +1,12 @@
+###
+  Test 4: Minimal stdlib usage
+###
+
+ambil "../morph/corelib/core/builtins.fox"
+
+fungsi utama()
+  var x = 10
+  var y = 20
+  var hasil = x + y
+  hasil
+tutup_fungsi

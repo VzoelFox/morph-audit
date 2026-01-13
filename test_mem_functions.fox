@@ -1,0 +1,30 @@
+###
+  Test Memory Functions Directly
+###
+
+ambil "../morph/corelib/lib/memory.fox"
+
+fungsi utama()
+  ; Test mem_alloc_safe
+  var buffer = mem_alloc_safe(64)
+
+  jika (buffer == 0)
+    sistem 90, 999  ; Failed
+    kembali 1
+  tutup_jika
+
+  ; Test mem_store_byte_safe
+  mem_store_byte_safe(buffer + 0, 72)  ; 'H'
+  mem_store_byte_safe(buffer + 1, 105) ; 'i'
+  mem_store_byte_safe(buffer + 2, 0)   ; null
+
+  ; Test mem_load_byte_safe
+  var ch1 = mem_load_byte_safe(buffer + 0)
+  var ch2 = mem_load_byte_safe(buffer + 1)
+
+  sistem 90, ch1  ; Should print 72
+  sistem 90, ch2  ; Should print 105
+
+  mem_free_safe(buffer, 64)
+  kembali 0
+tutup_fungsi
